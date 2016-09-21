@@ -34,9 +34,9 @@ public class War {
                     }
                     else
                         sum2 += 10;
-                    i += 10;
+                    i += 4;
                 }
-                if (cardValue.get(deck1[i]) > cardValue.get(deck2[i])) {
+                else if (cardValue.get(deck1[i]) > cardValue.get(deck2[i])) {
                     sum1 += 2;
                 } else
                     sum2 += 2;
