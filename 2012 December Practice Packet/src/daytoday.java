@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by nguyenl on 9/29/2016.
@@ -18,14 +19,11 @@ public class daytoday {
 
         while (sets-- > 0) {
             String[] line = in.nextLine().split(" ");
-            Calendar date1 = new GregorianCalendar(Integer.parseInt(line[2]), Integer.parseInt(line[1]), Integer.parseInt(line[0]));
-            Calendar date2 = new GregorianCalendar(Integer.parseInt(line[5]), Integer.parseInt(line[4]), Integer.parseInt(line[3]));
-            //SimpleDateFormat date1 = new SimpleDateFormat(line1[0] + " " + line1[1] + " " + line1[2]);
-            //SimpleDateFormat date2 = new SimpleDateFormat(line1[3] + " " + line1[4] + " " + line1[5]);
-            long date3 = date2.getTimeInMillis() - date1.getTimeInMillis();
-            GregorianCalendar finalDate = new GregorianCalendar();
-            finalDate.setTimeInMillis(date3);
-            System.out.println(finalDate.getTime());
+            Calendar date1 = new GregorianCalendar(Integer.parseInt(line[2]), Integer.parseInt(line[0]), Integer.parseInt(line[1]));
+            Calendar date2 = new GregorianCalendar(Integer.parseInt(line[5]), Integer.parseInt(line[3]) , Integer.parseInt(line[4]));
+            long date3 = Math.abs(date2.getTimeInMillis() - date1.getTimeInMillis());
+            //-1 due to day starting at 0
+            System.out.println(TimeUnit.DAYS.convert(date3, TimeUnit.MILLISECONDS) - 1);
         }
     }
 }
