@@ -3,6 +3,29 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
+<<<<<<< HEAD
+ * Created by Long on 9/21/2016.
+ */
+public class Puddle {
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner in = new Scanner(new File("puddle.dat"));
+        char[][] map = new char[in.nextInt()][in.nextInt()];
+        in.nextLine();
+        for (int i = 0; i < map.length; i++) {
+            char[] line = in.nextLine().toCharArray();
+            for (int j = 0; j < map[i].length; j++) {
+                map[i][j] = line[j];
+            }
+        }
+
+        int sets = Integer.parseInt(in.nextLine().trim());
+
+        while (sets-- > 0) {
+            String[] coords = in.nextLine().split(" ");
+            if (map[Integer.parseInt(coords[0])][Integer.parseInt(coords[1])] == 'G') {
+
+            }
+=======
  * Created by nguyenl on 9/22/2016.
  */
 public class Puddle {
@@ -52,6 +75,7 @@ public class Puddle {
             freezeWAter(x, y + 1);
             freezeWAter(x - 1, y);
             freezeWAter(x, y - 1);
+>>>>>>> master
         }
     }
 }
