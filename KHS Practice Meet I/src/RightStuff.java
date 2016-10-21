@@ -1,74 +1,51 @@
-/**
- * Created by isenseed on 10/19/2016.
- */
-import java.io.*;
-import java.util.DoubleSummaryStatistics;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
+
+/**
+ * Created by nguyenl on 10/21/2016.
+ */
 public class RightStuff {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner in = new Scanner(new File("rightstuff.dat"));
-        int sets = Integer.parseInt(in.nextLine());
-        boolean accu = false;
-        boolean prec = false;
+        int sets = Integer.parseInt(in.nextLine().trim());
 
         while (sets-- > 0) {
-            String[] s = in.nextLine().split(" ");
-            double acc = Double.parseDouble(s[0]); //accepted answer
-
-            //accuracy work
-            double avg = 0; double inc = 0;
-            for (int i = 0; i < s.length; i++) {
-                avg += Double.parseDouble(s[i]);
-                inc++;
+            String[] line = in.nextLine().split(" ");
+            boolean both = false, accurate = false, precise = false;
+            double[] dataList = new double[line.length - 1];
+            double accepted = Double.parseDouble(line[0]);
+            for (int i = 0; i < dataList.length; i++) {
+                dataList[i] = Double.parseDouble(line[i + 1]);
             }
-            avg /= inc;
-
-            if(1-(avg/acc)<=.05) {
-                accu = true;
+            Arrays.sort(dataList);
+            double sum = 0;
+            for (double v : dataList) {
+                sum += v;
             }
-            //accuracy work done
-
-            //precision work, got highest value
-            double high = 0; double valOne = 0; double valTwo = 0;
-            for (int i = 1; i < s.length-1; i++) {
-                valOne = Double.parseDouble(s[i]); valTwo = Double.parseDouble(s[i+1]);
-                if(valOne > valTwo)
-                    if(valOne > high)
-                        high = valOne;
-                if(valTwo > valOne)
-                    if(valTwo > high)
-                        high = valTwo;
+            double avg = sum / dataList.length;
+            double accuracy = (accepted * .05);
+            if (avg <= accepted + accuracy && avg >= accepted - accuracy) {
+                accurate = true;
             }
 
-            //for lowest value
-            double low = Double.parseDouble(s[1]); valOne = 0; valTwo = 0;
-            for (int i = 1; i < s.length-1; i++) {
-                valOne = Double.parseDouble(s[i]); valTwo = Double.parseDouble(s[i+1]);
-                if(valOne < valTwo)
-                    if(valOne < low)
-                        low = valOne;
-                if(valTwo < valOne)
-                    if(valTwo < low)
-                        low = valTwo;
+            double range = dataList[dataList.length - 1] - dataList[0];
+            if (range <= avg * .1) {
+                precise = true;
             }
-            System.out.println((1-(high-low))/acc);
-            if((1-(high-low))/acc<=.1 && !(((1-(high-low))/acc < 0))) //fix how prec is being trued/falsed
-                prec = true;
-            //precision work done
-            System.out.println("prec: " + prec + " accu: " + accu);
+            if (precise && accurate) {
+                both = true;
+            }
 
-
-            if (prec && accu) {
+            if (both) {
                 System.out.println("Both");
-            }
-            else if(prec)
+            } else if (precise) {
                 System.out.println("Precise");
-            else if (accu) {
+            } else if (accurate)
                 System.out.println("Accurate");
-            }
             else
                 System.out.println("Neither");
-            System.out.println();
         }
     }
 }
