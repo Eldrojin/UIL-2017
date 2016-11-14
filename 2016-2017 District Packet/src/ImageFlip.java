@@ -35,6 +35,7 @@ public class ImageFlip {
                 }
             }
 
+
             for (char[] chars : nPainting) {
                 for (char aChar : chars) {
                     System.out.print(aChar);
