@@ -13,21 +13,30 @@ public class Meddle {
 
         while (sets-- > 0) {
             char[] alphabet = in.nextLine().toCharArray();
-            ArrayList<String> charList = new ArrayList<>();
+            ArrayList<Character> charList = new ArrayList<>();
             for (int i = 0; i < alphabet.length; i++) {
-                charList.add("" + alphabet[i]);
+                charList.add(alphabet[i]);
             }
             int words = new Integer(in.nextLine());
             for (int i = 0; i < words; i++) {
-                boolean b = true;
+                boolean b = false;
                 String word = in.nextLine();
                 char[] charLists = word.toCharArray();
+                int k = 0;
+                //Go through each word character
                 for (int j = 0; j < charLists.length; j++) {
-                    for (int k = 0; k < charList.size(); k++) {
-                        if (!("" + charLists[k]).equalsIgnoreCase(charList.get(k))) {
-                            b = false;
+                    //Go through each character from alphabet
+                    boolean c = false;
+                    for (; k < charList.size(); k++) {
+                        //
+                        if ((charList.get(k)).equals((charLists[j]))) {
+                            b = true;
+                            c = true;
                             break;
                         }
+                    }
+                    if (c == false) {
+                        b = false;
                     }
                 }
                 System.out.println(b ? word + ": YES" : word + ": NO");
