@@ -1,21 +1,13 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.HashSet;
-import java.util.Scanner;
-
-/**
- * Created by nguyenl on 11/16/2016.
- */
+import java.io.*;
+import java.util.*;
 public class Wordoku {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner in = new Scanner(new File("wordoku.dat"));
         int sets = new Integer(in.nextLine());
-
         while (sets-- > 0) {
             int size = new Integer(in.nextLine());
             String[][] wordoku = new String[size][size];
             boolean b1 = true;
-
             for (int i = 0; i < size; i++) {
                 String[] line = in.nextLine().split(" ");
                 for (int j = 0; j < size; j++) {
@@ -24,12 +16,10 @@ public class Wordoku {
             }
             if (in.hasNextLine())
                 in.nextLine();
-
             HashSet<String> testLetters1 = new HashSet<>();
             for (int i = 0; i < size; i++) {
                 testLetters1.add(wordoku[0][i]);
             }
-
             for (int i = 0; i < size; i++) {
                 HashSet<String> testing = new HashSet<>();
                 for (int j = 0; j < size; j++) {

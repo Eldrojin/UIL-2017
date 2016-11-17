@@ -10,17 +10,17 @@ public class Square {
             String num = in.nextLine();
             int sum = 0;
             if (num.equals((new StringBuilder(num)).reverse().toString())) {
-                int counter = 1;
-                while (sum <= new Integer(num)) {
-                    sum += (int) (Math.pow(counter++, 2));
-
+                outer : for (int i = 0; i < new Integer(num); i++) {
+                    sum = 0;
+                    for (int j = i; j < new Integer(num); j++) {
+                        sum += (int) (Math.pow(j, 2));
+                        if (sum == new Integer(num)) {
+                            break outer;
+                        }
+                    }
                 }
             }
-
-            if (sum == new Integer(num)) {
-                System.out.println("YES");
-            } else
-                System.out.println("NO");
+            System.out.println(sum == new Integer(num) ? "YES" : "NO");
         }
     }
 }
