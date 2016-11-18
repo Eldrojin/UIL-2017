@@ -10,6 +10,7 @@ public class Paint {
         Scanner in = new Scanner(new File("paint.dat"));
         int sets = new Integer(in.nextLine());
         while (sets-- > 0) {
+            //System.out.println(sets);
             String[] ln = in.nextLine().split(" ");
             int sz1 = new Integer(ln[0]), sz2 = new Integer(ln[1]);
             char[][] paper = new char[sz1][sz2];
@@ -24,10 +25,15 @@ public class Paint {
                 for (int j = 0; j < paper.length; j++) {
                     for (int k = 0; k < paper[i].length; k++) {
                         if (query[i] == 'H' && paper[j][k] == 'x') {
-                            paper[j][paper[j].length - k] = 'x';
+                            paper[j][paper[j].length - k - 1] = 'x';
                         }
+                    }
+
+                }
+                for (int j = 0; j < paper[i].length; j++) {
+                    for (int k = 0; k < paper.length; k++) {
                         if (query[i] == 'V' && paper[k][j] == 'x') {
-                            paper[paper.length - k][j] = 'x';
+                            paper[paper.length - k - 1][j] = 'x';
                         }
                     }
                 }
