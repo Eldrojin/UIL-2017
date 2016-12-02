@@ -68,6 +68,7 @@ public class Sorts {
             int temp = sort[i];
             sort[i] = min;
             sort[index] = temp;
+
         }
         return sort;
     }
