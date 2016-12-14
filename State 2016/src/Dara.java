@@ -1,8 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by nguyenl on 12/7/2016.
@@ -14,11 +12,13 @@ public class Dara {
         while (in.hasNext()) {
             String mainExpression = in.nextLine();
             String[] parseExpression = mainExpression.split("( \\+ )|( - )");
-            String[] operatorsRead = mainExpression.split("(\\d+X\\^\\d+)|(\\d+X)|(\\d+)");
+            String[] operatorsRead = mainExpression.split("(X\\^\\d+)|(\\d+X\\^\\d+)|(\\d+X)|(\\d+)|(X)");
             LinkedList<String> operators = new LinkedList<>();
             for (String s : operatorsRead) {
+                if (s.length() > 1)
                 operators.add(s);
             }
+            System.out.println(operators);
             String[] build1 = derivatives(parseExpression);
             String[] build2 = derivatives(derivatives(parseExpression));
             System.out.println(addOperators(operators, build1));
@@ -52,15 +52,25 @@ public class Dara {
         return build;
     }
 
-    public static ArrayList<String> addOperators(LinkedList<String> operators, String[] build) {
-        ArrayList<String> finalBuild = new ArrayList<>();
-        for (int i = 0; i < build.length; i++) {
-            if (!build[i].equals("0")) {
-                finalBuild.add(build[i]);
-                operators.add(operators.remove(i));
-            } else
-                operators.remove();
+    public static String addOperators(LinkedList<String> operators, String[] build) {
+        String fin = "";
+        if (operators.size() > 0 && build.length > 1) {
+            for (int i = 1; i < build.length; i++) {
+                if (build[i].equals("0")) {
+                    fin += build[i - 1];
+                }
+                 else if (build[i].length() > 0 && !build[i].equals("0")) {
+                    fin += build[i - 1] + operators.poll();
+                }
+                else {
+                    fin += build[i];
+                }
+            }
+            return fin;
         }
-        return finalBuild;
+        for (String s : build) {
+            fin += s;
+        }
+        return fin;
     }
 }
