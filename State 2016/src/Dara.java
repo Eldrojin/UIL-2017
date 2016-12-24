@@ -8,26 +8,27 @@ import java.util.*;
 public class Dara {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner in = new Scanner(new File("dara.dat"));
-
         while (in.hasNext()) {
             String mainExpression = in.nextLine();
             String[] parseExpression = mainExpression.split("( \\+ )|( - )");
             String[] operatorsRead = mainExpression.split("(X\\^\\d+)|(\\d+X\\^\\d+)|(\\d+X)|(\\d+)|(X)");
             LinkedList<String> operators = new LinkedList<>();
+            LinkedList<String> operators2 = new LinkedList<>();
             for (String s : operatorsRead) {
-                if (s.length() > 1)
-                operators.add(s);
+                if (s.length() > 1) {
+                    operators.add(s);
+                    operators2.add(s);
+                }
             }
-            System.out.println(operators);
             String[] build1 = derivatives(parseExpression);
             String[] build2 = derivatives(derivatives(parseExpression));
-            System.out.println(addOperators(operators, build1));
+            System.out.println(addOperators(operators, build1) + " : " + addOperators(operators2, build2));
         }
     }
 
     public static String[] derivatives(String[] parseExpression) {
-        String[] build = new String[parseExpression.length];
-        for (int i = 0; i < parseExpression.length; i++) {
+        String[] build = new String[(parseExpression[parseExpression.length - 1].equalsIgnoreCase("0") && parseExpression.length != 1 ? parseExpression.length - 1 : parseExpression.length)];
+        for (int i = 0; i < build.length; i++) {
             if (!parseExpression[i].contains("X")) {
                 build[i] = "" + 0;
             } else {
@@ -62,9 +63,9 @@ public class Dara {
                  else if (build[i].length() > 0 && !build[i].equals("0")) {
                     fin += build[i - 1] + operators.poll();
                 }
-                else {
-                    fin += build[i];
-                }
+            }
+            if (fin.trim().charAt(fin.trim().length() - 1) == '+' || fin.trim().charAt(fin.trim().length() - 1) == '-') {
+                fin += build[build.length - 1];
             }
             return fin;
         }
