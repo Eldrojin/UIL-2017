@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Created by uil on 1/19/2017.
+ * Created by nguyenl on 1/23/2017.
  */
 public class Exponentiation {
     public static void main(String[] args) throws FileNotFoundException {
@@ -11,67 +11,18 @@ public class Exponentiation {
         int sets = new Integer(in.nextLine());
 
         while (sets-- > 0) {
-            String[] line = in.nextLine().split("\\s+");
-            double a = new Double(line[0]);
-            double b = new Double(line[1]);
-            double c = new Double(line[0]);
-            double d = new Double(line[1]);
-            int n = new Integer(line[2]);
-            while (n-- > 1) {
-                double tempa = a;
-                a = a * c - b * d;
-                b = tempa * d + b * c;
+            String[] line = in.nextLine().split(" ");
+            double aTmp = new Double(line[0]);
+            double bTmp = new Double(line[1]);
+            int exponent = new Integer(line[2]);
+            double a = (aTmp * aTmp) - (bTmp * bTmp);
+            double b = (aTmp * bTmp) + (bTmp * aTmp);
+            for (int i = 2; i < exponent; i++) {
+                double store = (a * aTmp) - (b * bTmp);
+                b = (aTmp * bTmp) + (bTmp * aTmp);
+                a = store;
             }
             System.out.println("(" + a + "," + b + ")");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            /*String[] line = in.nextLine().split(" ");
-            double a = new Double(line[0]);
-            double b = new Double(line[1]);
-            int exponents = new Integer(line[2]);
-
-            double finA = 0;
-            double finB = 0;
-
-            while (exponents-- >= 2) {
-                finA = a;
-                finB = b;
-                a = (finA* finA) - (finB * finB);
-                b = (finA * finB) + (finB * finA);
-            }
-
-            if (exponents == 1) {
-                System.out.println("(" + a + "," + b + ")");
-            } else
-                System.out.println("(" + a + "," + b + ")");*/
         }
     }
 }
