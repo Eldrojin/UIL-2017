@@ -41,11 +41,9 @@ class list {
         this.name = name;
         this.ingredients = new HashMap<>();
     }
-
     public void add(String key, String value) {
         ingredients.put(key, value);
     }
-
     public String toString() {
         String str = "{";
         for (String s : ingredients.keySet()) {
