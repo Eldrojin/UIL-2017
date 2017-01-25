@@ -1,6 +1,7 @@
-import java.io.*;
-import java.math.BigInteger;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Rabbits {
     public static void main(String[] args) throws IOException {
@@ -9,15 +10,7 @@ public class Rabbits {
         while (sets-- > 0) {
             int num = new Integer(in.nextLine().trim());
             ArrayList<Integer> list = new ArrayList<>();
-            System.out.println(recurse(num, list));
+
         }
-
-    }
-
-    public static int recurse(int n, ArrayList<Integer> list) {
-        if (n <= 2)
-            return 1;
-        else
-            return recurse(n - 1, list) + recurse(n - 2, list);
     }
 }
