@@ -33,7 +33,7 @@ public class Code {
                 String newMessage = "";
                 if (types.equalsIgnoreCase("E")) {
                     for (int j = 0; j < translate.length; j++) {
-                        if (translate[j] == ' ' || Character.isUpperCase(translate[j])) {
+                        if (translate[j] == ' ' || Character.isUpperCase(translate[j]) || !Character.isLetter(translate[j]) || Character.isDigit(translate[j])) {
                             continue;
                         }
                         int t = find(mainAlphabet, alphabet[find(mainAlphabet, translate[j])]) + offset;
