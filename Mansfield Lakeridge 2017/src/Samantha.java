@@ -39,7 +39,7 @@ public class Samantha {
             }
             int sf = (int)(((.06 + x *  .07) * ls) + (4 * x * .0789  * hs));
             System.out.println(mean + " " + median + " " + sf);
-
+//          just gotta make sure this timeline is balanced now
         }
     }
 }
