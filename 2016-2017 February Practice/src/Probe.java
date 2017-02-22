@@ -26,16 +26,15 @@ public class Probe {
             for (int i = 1; i < map.length - 1; i++) {
                 int temp = 0;
                 String[][] copy = map.clone();
-                for (int j = i - 1; j < i + 2; j++) {
-                    for (int k = i - 1; k < i + 2; k++) {
-                        temp += new Integer(copy[j][k]);
-                        copy[j][k] = "0";
-                        for (String[] strings : copy) {
-                            System.out.println(Arrays.toString(strings));
-                        }
-                        System.out.println();
-                    }
-                }
+                temp += new Integer(copy[i - 1][i - 1]);
+                temp += new Integer(copy[i - 1][i]);
+                temp += new Integer(copy[i - 1][i + 1]);
+                temp += new Integer(copy[i][i - 1]);
+                temp += new Integer(copy[i][i]);
+                temp += new Integer(copy[i][i + 1]);
+                temp += new Integer(copy[i + 1][i - 1]);
+                temp += new Integer(copy[i + 1][i]);
+                temp += new Integer(copy[i + 1][i + 1]);
 
                 System.out.println(temp);
             }
